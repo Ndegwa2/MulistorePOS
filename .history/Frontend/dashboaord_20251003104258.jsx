@@ -43,7 +43,6 @@ export default function Dashboard() {
     if (active === "reports") return <ReportsPanel />;
     if (active === "quotations") return <QuotationsPanel />;
     if (active === "transfers") return <TransfersPanel />;
-    if (active === "users") return <UsersPanel />;
     return <CategoryPanel />;
   }
 

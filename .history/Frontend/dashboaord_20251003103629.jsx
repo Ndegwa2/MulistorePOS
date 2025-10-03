@@ -8,11 +8,6 @@ import BrandPanel from "./brand";
 import ProductPanel from "./productPanel";
 import StockPanel from "./stockPanel";
 import SalesPanel from "./salesPanel";
-import AccountingPanel from "./accountingPanel";
-import ReportsPanel from "./reportsPanel";
-import QuotationsPanel from "./quotationsPanel";
-import TransfersPanel from "./transfersPanel";
-import UsersPanel from "./usersPanel";
 
 const NAV = [
   { key: "categories", label: "Categories", icon: Folder },
@@ -21,11 +16,6 @@ const NAV = [
   { key: "products", label: "Products", icon: Folder },
   { key: "stock", label: "Stock", icon: Layers },
   { key: "sales", label: "Sales", icon: Tag },
-  { key: "accounting", label: "Accounting", icon: Folder },
-  { key: "reports", label: "Reports", icon: Tag },
-  { key: "quotations", label: "Quotations", icon: Folder },
-  { key: "transfers", label: "Transfers", icon: Layers },
-  { key: "users", label: "Users", icon: Tag },
 ];
 
 export default function Dashboard() {
@@ -39,11 +29,6 @@ export default function Dashboard() {
     if (active === "products") return <ProductPanel />;
     if (active === "stock") return <StockPanel />;
     if (active === "sales") return <SalesPanel />;
-    if (active === "accounting") return <AccountingPanel />;
-    if (active === "reports") return <ReportsPanel />;
-    if (active === "quotations") return <QuotationsPanel />;
-    if (active === "transfers") return <TransfersPanel />;
-    if (active === "users") return <UsersPanel />;
     return <CategoryPanel />;
   }
 
