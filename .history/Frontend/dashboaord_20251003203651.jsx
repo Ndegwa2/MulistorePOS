@@ -31,7 +31,6 @@ const NAV = [
 export default function Dashboard() {
   const [active, setActive] = useState("categories");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // small helper for rendering the active panel
   function renderPanel() {
@@ -53,11 +52,10 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-text flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-slate-800 text-white border-r-4 border-primary
-                   flex flex-col justify-between transition-all duration-300 z-50 shadow-2xl
-                   ${sidebarCollapsed ? 'w-16' : 'w-64'}
-                   ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-                   md:translate-x-0`}
+        className={`fixed left-0 top-0 h-screen bg-sidebar text-white border-r border-sidebar/20
+                   flex flex-col justify-between transition-all duration-300 ${
+                     sidebarCollapsed ? 'w-16' : 'w-64'
+                   }`}
         aria-label="Sidebar"
       >
         <div>
@@ -83,7 +81,7 @@ export default function Dashboard() {
                   onClick={() => setActive(n.key)}
                   className={`group w-full flex items-center gap-3 px-4 py-3 my-1 rounded-lg text-left
                               transition-all duration-200 hover:scale-105
-                              ${isActive ? "bg-primary text-white shadow-lg shadow-primary/25 ring-2 ring-primary/50" : "hover:bg-white/10 text-white/80"}`}
+                              ${isActive ? "bg-primary text-white shadow-lg shadow-primary/25" : "hover:bg-sidebar/20 text-white/80"}`}
                   aria-current={isActive ? "page" : undefined}
                 >
                   <div className={`p-2 rounded-md ${isActive ? "bg-white/20" : "bg-transparent"}`}>
@@ -99,94 +97,30 @@ export default function Dashboard() {
 
         {/* bottom area */}
         <div className="px-4 pb-6">
-          <div className="border-t border-sidebar/20 pt-4 flex flex-col gap-2">
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 text-white/80 hover:text-white transition-all hover:scale-105">
-              <Settings className="w-4 h-4" />
-              {!sidebarCollapsed && <span className="text-sm">Settings</span>}
+          <div className="border-t border-slate-200 pt-4 flex flex-col gap-2">
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+              <Settings className="w-4 h-4 text-slate-600" />
+              <span className="text-sm text-slate-600">Settings</span>
             </button>
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 text-white/80 hover:text-white transition-all hover:scale-105">
-              <LogOut className="w-4 h-4" />
-              {!sidebarCollapsed && <span className="text-sm">Logout</span>}
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
+              <LogOut className="w-4 h-4 text-slate-600" />
+              <span className="text-sm text-slate-600">Logout</span>
             </button>
           </div>
         </div>
       </aside>
 
-      {/* Mobile Overlay */}
-      {mobileSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-          onClick={() => setMobileSidebarOpen(false)}
-        />
-      )}
-
-      {/* Top Bar */}
-      <header className={`fixed top-0 left-0 right-0 h-16 bg-white shadow-sm border-b border-gray-200 flex items-center justify-between px-4 md:px-6 transition-all duration-300 ${
-        sidebarCollapsed ? 'md:left-16' : 'md:left-64'
-      }`}>
-        <div className="flex items-center gap-4">
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 rounded-md hover:bg-gray-100"
-            onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-          {/* Search bar */}
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-64 px-4 py-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          {/* Notifications */}
-          <button className="p-2 rounded-md hover:bg-gray-100 relative">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM15 7v5H9v-5H3v5h6v5l5-5V7h6z" />
-            </svg>
-            <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-          </button>
-          {/* User Profile */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
-              U
-            </div>
-            <span className="text-sm font-medium">User</span>
-          </div>
-        </div>
-      </header>
-
       {/* Main content */}
-      <main className={`flex-1 bg-background min-h-screen text-text p-4 md:p-8 transition-all duration-300 mt-16 ${
-        sidebarCollapsed ? 'md:ml-16' : 'md:ml-64'
-      }`}>
-        {/* Breadcrumbs and Page Title */}
-        <div className="mb-6">
-          <nav className="flex mb-2" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2">
-              <li>
-                <a href="#" className="text-primary hover:text-primary/80">Home</a>
-              </li>
-              <li className="flex items-center">
-                <svg className="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                </svg>
-                <span className="text-gray-600">{NAV.find((n) => n.key === active)?.label}</span>
-              </li>
-            </ol>
-          </nav>
-          <h1 className="text-3xl font-bold tracking-tight text-text">
-            {NAV.find((n) => n.key === active)?.label}
-          </h1>
-        </div>
+      <main className="flex-1 ml-64 bg-secondary min-h-screen text-text p-8">
+        {/* Top header (shows active panel name) */}
+        <header className="mb-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {NAV.find((n) => n.key === active)?.label}
+            </h2>
+            <div className="text-sm text-text">Welcome back — manage your store data</div>
+          </div>
+        </header>
 
         {/* Content area with simple fade/slide animation */}
         <section

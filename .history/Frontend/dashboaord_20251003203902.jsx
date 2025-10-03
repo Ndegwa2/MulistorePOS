@@ -53,8 +53,8 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-text flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-slate-800 text-white border-r-4 border-primary
-                   flex flex-col justify-between transition-all duration-300 z-50 shadow-2xl
+        className={`fixed left-0 top-0 h-screen bg-sidebar text-white border-r border-sidebar/20
+                   flex flex-col justify-between transition-all duration-300 z-50
                    ${sidebarCollapsed ? 'w-16' : 'w-64'}
                    ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
                    md:translate-x-0`}
@@ -83,7 +83,7 @@ export default function Dashboard() {
                   onClick={() => setActive(n.key)}
                   className={`group w-full flex items-center gap-3 px-4 py-3 my-1 rounded-lg text-left
                               transition-all duration-200 hover:scale-105
-                              ${isActive ? "bg-primary text-white shadow-lg shadow-primary/25 ring-2 ring-primary/50" : "hover:bg-white/10 text-white/80"}`}
+                              ${isActive ? "bg-primary text-white shadow-lg shadow-primary/25" : "hover:bg-sidebar/20 text-white/80"}`}
                   aria-current={isActive ? "page" : undefined}
                 >
                   <div className={`p-2 rounded-md ${isActive ? "bg-white/20" : "bg-transparent"}`}>
@@ -100,11 +100,11 @@ export default function Dashboard() {
         {/* bottom area */}
         <div className="px-4 pb-6">
           <div className="border-t border-sidebar/20 pt-4 flex flex-col gap-2">
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 text-white/80 hover:text-white transition-all hover:scale-105">
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar/20 text-white/80 hover:text-white transition-all hover:scale-105">
               <Settings className="w-4 h-4" />
               {!sidebarCollapsed && <span className="text-sm">Settings</span>}
             </button>
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 text-white/80 hover:text-white transition-all hover:scale-105">
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar/20 text-white/80 hover:text-white transition-all hover:scale-105">
               <LogOut className="w-4 h-4" />
               {!sidebarCollapsed && <span className="text-sm">Logout</span>}
             </button>
@@ -121,8 +121,8 @@ export default function Dashboard() {
       )}
 
       {/* Top Bar */}
-      <header className={`fixed top-0 left-0 right-0 h-16 bg-white shadow-sm border-b border-gray-200 flex items-center justify-between px-4 md:px-6 transition-all duration-300 ${
-        sidebarCollapsed ? 'md:left-16' : 'md:left-64'
+      <header className={`fixed top-0 right-0 h-16 bg-white shadow-sm border-b border-gray-200 flex items-center justify-between px-6 transition-all duration-300 ${
+        sidebarCollapsed ? 'left-16' : 'left-64'
       }`}>
         <div className="flex items-center gap-4">
           {/* Mobile menu button */}

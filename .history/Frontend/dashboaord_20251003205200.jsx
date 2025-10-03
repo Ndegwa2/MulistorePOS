@@ -31,7 +31,7 @@ const NAV = [
 export default function Dashboard() {
   const [active, setActive] = useState("categories");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(true);
 
   // small helper for rendering the active panel
   function renderPanel() {

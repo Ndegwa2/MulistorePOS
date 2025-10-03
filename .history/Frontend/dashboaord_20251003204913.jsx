@@ -31,7 +31,7 @@ const NAV = [
 export default function Dashboard() {
   const [active, setActive] = useState("categories");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(true);
 
   // small helper for rendering the active panel
   function renderPanel() {
@@ -53,7 +53,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-text flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-slate-800 text-white border-r-4 border-primary
+        className={`fixed left-0 top-0 h-screen bg-sidebar text-white border-r-4 border-primary
                    flex flex-col justify-between transition-all duration-300 z-50 shadow-2xl
                    ${sidebarCollapsed ? 'w-16' : 'w-64'}
                    ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}

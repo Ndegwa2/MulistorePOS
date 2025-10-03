@@ -53,8 +53,8 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-text flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-slate-800 text-white border-r-4 border-primary
-                   flex flex-col justify-between transition-all duration-300 z-50 shadow-2xl
+        className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-sidebar to-sidebar/90 text-white border-r-2 border-primary/20
+                   flex flex-col justify-between transition-all duration-300 z-50 shadow-xl
                    ${sidebarCollapsed ? 'w-16' : 'w-64'}
                    ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
                    md:translate-x-0`}

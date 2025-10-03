@@ -12,12 +12,9 @@ export default function QuotationsPanel() {
   const [printingQuote, setPrintingQuote] = useState(null);
 
   const handleConvert = (id) => {
-    const quote = quotations.find(q => q.id === id);
-    if (quote) {
-      // In real app, this would call an API to create invoice
-      alert(`Quote #${id} for ${quote.customer} has been converted to Invoice. Total: $${quote.amount.toFixed(2)}`);
-      setQuotations(quotations.map(q => q.id === id ? { ...q, status: "Converted" } : q));
-    }
+    // In real app, create invoice from quote
+    alert("Quote converted to invoice!");
+    setQuotations(quotations.map(q => q.id === id ? { ...q, status: "Converted" } : q));
   };
 
   const handleCreateQuote = () => {

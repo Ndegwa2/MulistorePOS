@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         background: '#F9FAFB', // light gray background
-        sidebar: '#1E293B',    // dark slate sidebar
+        sidebar: '#334155',    // lighter slate sidebar for better visibility
         primary: '#2563EB',    // blue accent
         success: '#22C55E',    // green
         warning: '#FACC15',    // amber

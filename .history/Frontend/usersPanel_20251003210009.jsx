@@ -102,14 +102,12 @@ export default function UsersPanel() {
                 </td>
                 <td className="py-3 px-4">{user.permissions.join(", ")}</td>
                 <td className="py-3 px-4 text-right">
-                  {currentUserRole === "Admin" && (
-                    <button
-                      onClick={() => handleEdit(user)}
-                      className="text-primary hover:underline"
-                    >
-                      Edit
-                    </button>
-                  )}
+                  <button
+                    onClick={() => handleEdit(user)}
+                    className="text-primary hover:underline"
+                  >
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))}

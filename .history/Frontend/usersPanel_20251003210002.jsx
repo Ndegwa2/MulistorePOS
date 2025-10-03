@@ -64,14 +64,12 @@ export default function UsersPanel() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
         <h2 className="text-xl font-semibold">User & Role Management</h2>
-        {currentUserRole === "Admin" && (
-          <button
-            onClick={() => setShowCreateRoleModal(true)}
-            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-slate-700"
-          >
-            + Create Role
-          </button>
-        )}
+        <button
+          onClick={() => setShowCreateRoleModal(true)}
+          className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-slate-700"
+        >
+          + Create Role
+        </button>
       </div>
 
       {/* Users Table */}
@@ -102,14 +100,12 @@ export default function UsersPanel() {
                 </td>
                 <td className="py-3 px-4">{user.permissions.join(", ")}</td>
                 <td className="py-3 px-4 text-right">
-                  {currentUserRole === "Admin" && (
-                    <button
-                      onClick={() => handleEdit(user)}
-                      className="text-primary hover:underline"
-                    >
-                      Edit
-                    </button>
-                  )}
+                  <button
+                    onClick={() => handleEdit(user)}
+                    className="text-primary hover:underline"
+                  >
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))}

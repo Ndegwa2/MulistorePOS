@@ -12,12 +12,9 @@ export default function QuotationsPanel() {
   const [printingQuote, setPrintingQuote] = useState(null);
 
   const handleConvert = (id) => {
-    const quote = quotations.find(q => q.id === id);
-    if (quote) {
-      // In real app, this would call an API to create invoice
-      alert(`Quote #${id} for ${quote.customer} has been converted to Invoice. Total: $${quote.amount.toFixed(2)}`);
-      setQuotations(quotations.map(q => q.id === id ? { ...q, status: "Converted" } : q));
-    }
+    // In real app, create invoice from quote
+    alert("Quote converted to invoice!");
+    setQuotations(quotations.map(q => q.id === id ? { ...q, status: "Converted" } : q));
   };
 
   const handleCreateQuote = () => {
@@ -102,12 +99,6 @@ export default function QuotationsPanel() {
                   >
                     Print
                   </button>
-                  <button
-                    onClick={() => handleDownload(quote)}
-                    className="text-purple-600 hover:underline"
-                  >
-                    Download
-                  </button>
                   {quote.status === "Pending" && (
                     <button
                       onClick={() => handleConvert(quote.id)}
@@ -171,66 +162,6 @@ export default function QuotationsPanel() {
                 className="px-4 py-2 bg-primary text-white hover:bg-slate-700 rounded-lg"
               >
                 Create Quote
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Print Modal */}
-      {showPrintModal && printingQuote && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-xl w-full max-w-2xl shadow-2xl border border-slate-200 print:shadow-none print:border-none">
-            <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold">Quotation</h1>
-              <p className="text-sm text-slate-600">Quote #{printingQuote.id}</p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex justify-between">
-                <div>
-                  <h3 className="font-semibold">Customer:</h3>
-                  <p>{printingQuote.customer}</p>
-                </div>
-                <div className="text-right">
-                  <h3 className="font-semibold">Date:</h3>
-                  <p>{printingQuote.date}</p>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-semibold mb-2">Items:</h3>
-                <ul className="list-disc list-inside">
-                  {printingQuote.items.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="border-t pt-4">
-                <div className="flex justify-between text-lg font-semibold">
-                  <span>Total Amount:</span>
-                  <span>${printingQuote.amount.toFixed(2)}</span>
-                </div>
-              </div>
-
-              <div className="text-center text-sm text-slate-600 mt-6">
-                Status: {printingQuote.status}
-              </div>
-            </div>
-
-            <div className="flex justify-end gap-3 mt-8 print:hidden">
-              <button
-                onClick={() => window.print()}
-                className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg"
-              >
-                Print
-              </button>
-              <button
-                onClick={() => setShowPrintModal(false)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg"
-              >
-                Close
               </button>
             </div>
           </div>

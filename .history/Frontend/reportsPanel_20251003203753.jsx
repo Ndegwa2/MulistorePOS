@@ -73,29 +73,23 @@ export default function ReportsPanel() {
 
   return (
     <div className="text-text font-sans">
-      {/* Report Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { key: "sales", label: "Sales Report", desc: "View sales data and trends" },
-          { key: "inventory", label: "Inventory Report", desc: "Track stock movements" },
-          { key: "invoices", label: "Invoices Report", desc: "Manage billing status" },
-          { key: "p&l", label: "P&L Report", desc: "Financial summary" },
-        ].map(report => (
-          <div
-            key={report.key}
-            onClick={() => setActiveTab(report.key)}
-            className={`bg-white rounded-xl shadow-sm border p-6 cursor-pointer transition-all hover:shadow-md hover:scale-105 ${
-              activeTab === report.key ? "border-primary shadow-primary/20" : "border-gray-200"
-            }`}
+      <h2 className="text-xl font-semibold mb-6">Reports</h2>
+
+      {/* Tabs */}
+      <div className="flex gap-4 mb-6">
+        {["Sales", "Inventory", "Invoices", "P&L"].map(tab => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab.toLowerCase())}
+            className={`px-4 py-2 rounded-lg ${activeTab === tab.toLowerCase() ? "bg-primary text-white" : "bg-slate-100"}`}
           >
-            <h3 className="text-lg font-semibold mb-2">{report.label}</h3>
-            <p className="text-sm text-gray-600">{report.desc}</p>
-          </div>
+            {tab} Report
+          </button>
         ))}
       </div>
 
       {/* Report Content */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white rounded-2xl shadow p-6">
         {activeTab === "sales" && (
           <div>
             <h3 className="text-lg font-semibold mb-4">Sales Report</h3>

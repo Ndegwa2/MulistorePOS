@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
 export default function UsersPanel() {
-  // Simulate current user role - in real app, this would come from auth
-  const [currentUserRole] = useState("Admin"); // Change this to test different roles
-
   const [roles, setRoles] = useState(["Admin", "User", "Stock Manager"]);
 
   const [users, setUsers] = useState([
@@ -39,40 +36,9 @@ export default function UsersPanel() {
     });
   };
 
-  const toggleNewRolePermission = (perm) => {
-    setNewRole({
-      ...newRole,
-      permissions: newRole.permissions.includes(perm)
-        ? newRole.permissions.filter(p => p !== perm)
-        : [...newRole.permissions, perm]
-    });
-  };
-
-  const handleCreateRole = () => {
-    if (!newRole.name.trim()) return;
-    if (roles.includes(newRole.name)) {
-      alert("Role name already exists!");
-      return;
-    }
-    setRoles([...roles, newRole.name]);
-    setNewRole({ name: "", permissions: [] });
-    setShowCreateRoleModal(false);
-  };
-
   return (
     <div className="text-text font-sans">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
-        <h2 className="text-xl font-semibold">User & Role Management</h2>
-        {currentUserRole === "Admin" && (
-          <button
-            onClick={() => setShowCreateRoleModal(true)}
-            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-slate-700"
-          >
-            + Create Role
-          </button>
-        )}
-      </div>
+      <h2 className="text-xl font-semibold mb-6">User & Role Management</h2>
 
       {/* Users Table */}
       <div className="bg-white rounded-2xl shadow p-6 overflow-x-auto">
@@ -102,14 +68,12 @@ export default function UsersPanel() {
                 </td>
                 <td className="py-3 px-4">{user.permissions.join(", ")}</td>
                 <td className="py-3 px-4 text-right">
-                  {currentUserRole === "Admin" && (
-                    <button
-                      onClick={() => handleEdit(user)}
-                      className="text-primary hover:underline"
-                    >
-                      Edit
-                    </button>
-                  )}
+                  <button
+                    onClick={() => handleEdit(user)}
+                    className="text-primary hover:underline"
+                  >
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))}
@@ -165,59 +129,6 @@ export default function UsersPanel() {
                 className="px-4 py-2 bg-primary text-white hover:bg-slate-700 rounded-lg"
               >
                 Save
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Create Role Modal */}
-      {showCreateRoleModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl border border-slate-200">
-            <h2 className="text-lg font-semibold mb-4">Create Custom Role</h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm text-slate-600">Role Name</label>
-                <input
-                  type="text"
-                  value={newRole.name}
-                  onChange={(e) => setNewRole({ ...newRole, name: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Enter role name"
-                />
-              </div>
-              <div>
-                <label className="text-sm text-slate-600">Default Permissions</label>
-                <div className="mt-2 space-y-2">
-                  {["view", "add", "edit", "delete"].map(perm => (
-                    <label key={perm} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={newRole.permissions.includes(perm)}
-                        onChange={() => toggleNewRolePermission(perm)}
-                        className="mr-2"
-                      />
-                      {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-end gap-3 mt-6">
-              <button
-                onClick={() => setShowCreateRoleModal(false)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleCreateRole}
-                className="px-4 py-2 bg-primary text-white hover:bg-slate-700 rounded-lg"
-              >
-                Create Role
               </button>
             </div>
           </div>
