@@ -90,44 +90,44 @@ export default function BrandPanel() {
           placeholder="Search brands..."
           value={searchTerm}
           onChange={handleSearch}
-          className="w-full sm:w-1/3 bg-white text-text px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary outline-none"
+          className="w-full sm:w-1/3 bg-slate-800 text-slate-200 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
         />
-        <span className="text-sm text-slate-600">
+        <span className="text-sm text-slate-400">
           Showing {paginated.length} of {filtered.length} results
         </span>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl shadow p-6 overflow-x-auto">
-        <table className="w-full text-left border-collapse text-sm">
-          <thead className="bg-slate-100 border-b border-slate-200">
-            <tr>
-              <th className="py-3 px-4">#</th>
-              <th className="py-3 px-4">Name</th>
-              <th className="py-3 px-4">Slug</th>
-              <th className="py-3 px-4">Description</th>
-              <th className="py-3 px-4">Products</th>
-              <th className="py-3 px-4 text-right">Actions</th>
+      <div className="bg-slate-900 rounded-xl p-4 shadow-lg overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-slate-400 border-b border-slate-800">
+              <th className="py-2 text-left">#</th>
+              <th className="py-2 text-left">Name</th>
+              <th className="py-2 text-left">Slug</th>
+              <th className="py-2 text-left">Description</th>
+              <th className="py-2 text-left">Products</th>
+              <th className="py-2 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
             {paginated.map((brand, idx) => (
-              <tr key={brand.id} className="border-b hover:bg-slate-50">
-                <td className="py-3 px-4">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
-                <td className="py-3 px-4">{brand.name}</td>
-                <td className="py-3 px-4">{brand.slug}</td>
-                <td className="py-3 px-4 truncate max-w-xs">{brand.description}</td>
-                <td className="py-3 px-4">{brand.count}</td>
-                <td className="py-3 px-4 text-right space-x-2">
+              <tr key={brand.id} className="border-b border-slate-800 hover:bg-slate-800/50">
+                <td className="py-2 px-2">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+                <td className="py-2 px-2 font-medium">{brand.name}</td>
+                <td className="py-2 px-2 text-slate-400">{brand.slug}</td>
+                <td className="py-2 px-2 truncate max-w-xs">{brand.description}</td>
+                <td className="py-2 px-2">{brand.count}</td>
+                <td className="py-2 px-2 flex gap-2">
                   <button
                     onClick={() => handleEdit(brand)}
-                    className="text-primary hover:underline"
+                    className="px-2 py-1 bg-blue-600/40 rounded hover:bg-blue-600/60 text-xs"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(brand)}
-                    className="text-red-600 hover:underline"
+                    className="px-2 py-1 bg-red-600/40 rounded hover:bg-red-600/60 text-xs"
                   >
                     Delete
                   </button>
@@ -144,12 +144,12 @@ export default function BrandPanel() {
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
           className={`px-4 py-2 rounded-lg text-sm ${
-            currentPage === 1 ? "bg-slate-100 text-slate-400" : "bg-primary text-white hover:bg-slate-700"
+            currentPage === 1 ? "bg-slate-800 text-slate-600" : "bg-slate-800 hover:bg-slate-700"
           }`}
         >
           Prev
         </button>
-        <span className="text-slate-600 text-sm self-center">
+        <span className="text-slate-400 text-sm self-center">
           Page {currentPage} of {totalPages}
         </span>
         <button
@@ -157,8 +157,8 @@ export default function BrandPanel() {
           onClick={() => setCurrentPage(currentPage + 1)}
           className={`px-4 py-2 rounded-lg text-sm ${
             currentPage === totalPages
-              ? "bg-slate-100 text-slate-400"
-              : "bg-primary text-white hover:bg-slate-700"
+              ? "bg-slate-800 text-slate-600"
+              : "bg-slate-800 hover:bg-slate-700"
           }`}
         >
           Next
@@ -168,7 +168,7 @@ export default function BrandPanel() {
       {/* Floating Add Button */}
       <button
         onClick={handleAdd}
-        className="fixed bottom-8 right-8 bg-primary hover:bg-slate-700 w-14 h-14 flex items-center justify-center rounded-full shadow-lg text-white"
+        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 w-14 h-14 flex items-center justify-center rounded-full shadow-lg"
       >
         <span className="text-2xl">＋</span>
       </button>
@@ -176,35 +176,35 @@ export default function BrandPanel() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl border border-slate-200">
+          <div className="bg-slate-900 p-6 rounded-xl w-full max-w-md shadow-2xl border border-slate-800">
             <h2 className="text-lg font-semibold mb-4">Add New Brand</h2>
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm text-slate-600">Name</label>
+                <label className="text-sm text-slate-400">Name</label>
                 <input
                   type="text"
                   value={newBrand.name}
                   onChange={(e) => setNewBrand({ ...newBrand, name: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full mt-1 bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div>
-                <label className="text-sm text-slate-600">Slug</label>
+                <label className="text-sm text-slate-400">Slug</label>
                 <input
                   type="text"
                   value={newBrand.slug}
                   onChange={(e) => setNewBrand({ ...newBrand, slug: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full mt-1 bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div>
-                <label className="text-sm text-slate-600">Description</label>
+                <label className="text-sm text-slate-400">Description</label>
                 <textarea
                   rows="3"
                   value={newBrand.description}
                   onChange={(e) => setNewBrand({ ...newBrand, description: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full mt-1 bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
                 ></textarea>
               </div>
             </div>
@@ -212,13 +212,13 @@ export default function BrandPanel() {
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-primary text-white hover:bg-slate-700 rounded-lg"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg"
               >
                 Save
               </button>

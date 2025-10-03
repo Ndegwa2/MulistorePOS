@@ -5,13 +5,11 @@ import { Folder, Layers, Tag, Settings, LogOut } from "lucide-react";
 import CategoryPanel from "./categoryPanel";
 import SubCategoryPanel from "./subcategory";
 import BrandPanel from "./brand";
-import ProductPanel from "./productPanel";
 
 const NAV = [
   { key: "categories", label: "Categories", icon: Folder },
   { key: "subcategories", label: "Subcategories", icon: Layers },
   { key: "brands", label: "Brands", icon: Tag },
-  { key: "products", label: "Products", icon: Folder },
 ];
 
 export default function Dashboard() {
@@ -65,14 +63,14 @@ export default function Dashboard() {
 
         {/* bottom area */}
         <div className="px-4 pb-6">
-          <div className="border-t border-slate-200 pt-4 flex flex-col gap-2">
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-              <Settings className="w-4 h-4 text-slate-600" />
-              <span className="text-sm text-slate-600">Settings</span>
+          <div className="border-t border-slate-700 pt-4 flex flex-col gap-2">
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-700 transition-colors">
+              <Settings className="w-4 h-4 text-slate-200" />
+              <span className="text-sm text-slate-200">Settings</span>
             </button>
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-              <LogOut className="w-4 h-4 text-slate-600" />
-              <span className="text-sm text-slate-600">Logout</span>
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-700 transition-colors">
+              <LogOut className="w-4 h-4 text-slate-200" />
+              <span className="text-sm text-slate-200">Logout</span>
             </button>
           </div>
         </div>

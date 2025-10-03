@@ -5,13 +5,11 @@ import { Folder, Layers, Tag, Settings, LogOut } from "lucide-react";
 import CategoryPanel from "./categoryPanel";
 import SubCategoryPanel from "./subcategory";
 import BrandPanel from "./brand";
-import ProductPanel from "./productPanel";
 
 const NAV = [
   { key: "categories", label: "Categories", icon: Folder },
   { key: "subcategories", label: "Subcategories", icon: Layers },
   { key: "brands", label: "Brands", icon: Tag },
-  { key: "products", label: "Products", icon: Folder },
 ];
 
 export default function Dashboard() {
@@ -28,7 +26,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-secondary text-text flex">
       {/* Sidebar */}
       <aside
-        className="w-64 fixed left-0 top-0 h-screen bg-white text-text border-r border-slate-200
+        className="w-64 fixed left-0 top-0 h-screen bg-primary text-white border-r border-slate-700
                    flex flex-col justify-between"
         aria-label="Sidebar"
       >
@@ -49,11 +47,11 @@ export default function Dashboard() {
                   onClick={() => setActive(n.key)}
                   className={`group w-full flex items-center gap-3 px-4 py-3 my-1 rounded-lg text-left
                               transition-colors duration-150
-                              ${isActive ? "bg-slate-100 text-primary shadow-inner" : "hover:bg-slate-100"}`}
+                              ${isActive ? "bg-slate-700 text-white shadow-inner" : "hover:bg-slate-700"}`}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <div className={`p-2 rounded-md ${isActive ? "bg-primary/10" : "bg-transparent"}`}>
-                    <Icon className={`w-5 h-5 ${isActive ? "text-primary" : "text-slate-600"} transition-colors`} />
+                  <div className={`p-2 rounded-md ${isActive ? "bg-white/20" : "bg-transparent"}`}>
+                    <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-slate-300"} transition-colors`} />
                   </div>
                   <span className="flex-1">{n.label}</span>
                   {/* subtle chevron or count placeholder (optional) */}
@@ -65,28 +63,28 @@ export default function Dashboard() {
 
         {/* bottom area */}
         <div className="px-4 pb-6">
-          <div className="border-t border-slate-200 pt-4 flex flex-col gap-2">
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-              <Settings className="w-4 h-4 text-slate-600" />
-              <span className="text-sm text-slate-600">Settings</span>
+          <div className="border-t border-slate-800 pt-4 flex flex-col gap-2">
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 transition-colors">
+              <Settings className="w-4 h-4 text-slate-300" />
+              <span className="text-sm text-slate-300">Settings</span>
             </button>
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-              <LogOut className="w-4 h-4 text-slate-600" />
-              <span className="text-sm text-slate-600">Logout</span>
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800 transition-colors">
+              <LogOut className="w-4 h-4 text-slate-300" />
+              <span className="text-sm text-slate-300">Logout</span>
             </button>
           </div>
         </div>
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 ml-64 bg-secondary min-h-screen text-text p-8">
+      <main className="flex-1 ml-64 min-h-screen p-6">
         {/* Top header (shows active panel name) */}
         <header className="mb-6">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold tracking-tight">
               {NAV.find((n) => n.key === active)?.label}
             </h2>
-            <div className="text-sm text-text">Welcome back — manage your store data</div>
+            <div className="text-sm text-slate-400">Welcome back — manage your store data</div>
           </div>
         </header>
 

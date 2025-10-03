@@ -121,13 +121,13 @@ export default function BrandPanel() {
                 <td className="py-3 px-4 text-right space-x-2">
                   <button
                     onClick={() => handleEdit(brand)}
-                    className="text-primary hover:underline"
+                    className="bg-primary text-white px-2 py-1 rounded hover:bg-slate-700"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(brand)}
-                    className="text-red-600 hover:underline"
+                    className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
                   >
                     Delete
                   </button>

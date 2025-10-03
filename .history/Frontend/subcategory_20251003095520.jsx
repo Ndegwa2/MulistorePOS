@@ -92,44 +92,44 @@ export default function SubCategoryPanel() {
           placeholder="Search subcategories..."
           value={searchTerm}
           onChange={handleSearch}
-          className="w-full sm:w-1/3 bg-white text-text px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary outline-none"
+          className="w-full sm:w-1/3 bg-slate-800 text-slate-200 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
         />
-        <span className="text-sm text-slate-600">
+        <span className="text-sm text-slate-400">
           Showing {paginated.length} of {filtered.length} results
         </span>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl shadow p-6 overflow-x-auto">
-        <table className="w-full text-left border-collapse text-sm">
-          <thead className="bg-slate-100 border-b border-slate-200">
-            <tr>
-              <th className="py-3 px-4">#</th>
-              <th className="py-3 px-4">Name</th>
-              <th className="py-3 px-4">Slug</th>
-              <th className="py-3 px-4">Parent Category</th>
-              <th className="py-3 px-4">Products</th>
-              <th className="py-3 px-4 text-right">Actions</th>
+      <div className="bg-slate-900 rounded-xl p-4 shadow-lg overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-slate-400 border-b border-slate-800">
+              <th className="py-2 text-left">#</th>
+              <th className="py-2 text-left">Name</th>
+              <th className="py-2 text-left">Slug</th>
+              <th className="py-2 text-left">Parent Category</th>
+              <th className="py-2 text-left">Products</th>
+              <th className="py-2 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
             {paginated.map((sub, idx) => (
-              <tr key={sub.id} className="border-b hover:bg-slate-50">
-                <td className="py-3 px-4">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
-                <td className="py-3 px-4">{sub.name}</td>
-                <td className="py-3 px-4">{sub.slug}</td>
-                <td className="py-3 px-4">{sub.parent}</td>
-                <td className="py-3 px-4">{sub.count}</td>
-                <td className="py-3 px-4 text-right space-x-2">
+              <tr key={sub.id} className="border-b border-slate-800 hover:bg-slate-800/50">
+                <td className="py-2 px-2">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+                <td className="py-2 px-2 font-medium">{sub.name}</td>
+                <td className="py-2 px-2 text-slate-400">{sub.slug}</td>
+                <td className="py-2 px-2">{sub.parent}</td>
+                <td className="py-2 px-2">{sub.count}</td>
+                <td className="py-2 px-2 flex gap-2">
                   <button
                     onClick={() => handleEdit(sub)}
-                    className="text-primary hover:underline"
+                    className="px-2 py-1 bg-blue-600/40 rounded hover:bg-blue-600/60 text-xs"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(sub)}
-                    className="text-red-600 hover:underline"
+                    className="px-2 py-1 bg-red-600/40 rounded hover:bg-red-600/60 text-xs"
                   >
                     Delete
                   </button>

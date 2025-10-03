@@ -121,13 +121,13 @@ export default function BrandPanel() {
                 <td className="py-3 px-4 text-right space-x-2">
                   <button
                     onClick={() => handleEdit(brand)}
-                    className="text-primary hover:underline"
+                    className="bg-primary text-white px-2 py-1 rounded hover:bg-slate-700"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(brand)}
-                    className="text-red-600 hover:underline"
+                    className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
                   >
                     Delete
                   </button>
@@ -176,35 +176,35 @@ export default function BrandPanel() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl border border-slate-200">
+          <div className="bg-slate-900 p-6 rounded-xl w-full max-w-md shadow-2xl border border-slate-800">
             <h2 className="text-lg font-semibold mb-4">Add New Brand</h2>
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm text-slate-600">Name</label>
+                <label className="text-sm text-slate-400">Name</label>
                 <input
                   type="text"
                   value={newBrand.name}
                   onChange={(e) => setNewBrand({ ...newBrand, name: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full mt-1 bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div>
-                <label className="text-sm text-slate-600">Slug</label>
+                <label className="text-sm text-slate-400">Slug</label>
                 <input
                   type="text"
                   value={newBrand.slug}
                   onChange={(e) => setNewBrand({ ...newBrand, slug: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full mt-1 bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div>
-                <label className="text-sm text-slate-600">Description</label>
+                <label className="text-sm text-slate-400">Description</label>
                 <textarea
                   rows="3"
                   value={newBrand.description}
                   onChange={(e) => setNewBrand({ ...newBrand, description: e.target.value })}
-                  className="w-full mt-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full mt-1 bg-slate-800 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
                 ></textarea>
               </div>
             </div>
@@ -212,13 +212,13 @@ export default function BrandPanel() {
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-primary text-white hover:bg-slate-700 rounded-lg"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg"
               >
                 Save
               </button>

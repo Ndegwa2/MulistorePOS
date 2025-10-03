@@ -5,13 +5,11 @@ import { Folder, Layers, Tag, Settings, LogOut } from "lucide-react";
 import CategoryPanel from "./categoryPanel";
 import SubCategoryPanel from "./subcategory";
 import BrandPanel from "./brand";
-import ProductPanel from "./productPanel";
 
 const NAV = [
   { key: "categories", label: "Categories", icon: Folder },
   { key: "subcategories", label: "Subcategories", icon: Layers },
   { key: "brands", label: "Brands", icon: Tag },
-  { key: "products", label: "Products", icon: Folder },
 ];
 
 export default function Dashboard() {
