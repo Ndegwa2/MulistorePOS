@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Folder, Layers, Tag, Settings, LogOut, ChevronLeft, ChevronRight, Menu } from "lucide-react";
+import { Folder, Layers, Tag, Settings, LogOut, ChevronLeft, ChevronRight, Menu, ChevronDown, ChevronUp } from "lucide-react";
 
 // Assume these exist in your project
 import CategoryPanel from "./categoryPanel";
@@ -14,24 +14,46 @@ import QuotationsPanel from "./quotationsPanel";
 import TransfersPanel from "./transfersPanel";
 import UsersPanel from "./usersPanel";
 
-const NAV = [
-  { key: "categories", label: "Categories", icon: Folder },
-  { key: "subcategories", label: "Subcategories", icon: Layers },
-  { key: "brands", label: "Brands", icon: Tag },
-  { key: "products", label: "Products", icon: Folder },
-  { key: "stock", label: "Stock", icon: Layers },
-  { key: "sales", label: "Sales", icon: Tag },
-  { key: "accounting", label: "Accounting", icon: Folder },
-  { key: "reports", label: "Reports", icon: Tag },
-  { key: "quotations", label: "Quotations", icon: Folder },
-  { key: "transfers", label: "Transfers", icon: Layers },
-  { key: "users", label: "Users", icon: Tag },
+const NAV_GROUPS = [
+  {
+    key: "inventory",
+    label: "Inventory",
+    icon: Folder,
+    items: [
+      { key: "categories", label: "Categories", icon: Folder },
+      { key: "subcategories", label: "Subcategories", icon: Layers },
+      { key: "brands", label: "Brands", icon: Tag },
+      { key: "products", label: "Products", icon: Folder },
+      { key: "stock", label: "Stock", icon: Layers },
+    ]
+  },
+  {
+    key: "sales",
+    label: "Sales",
+    icon: Tag,
+    items: [
+      { key: "sales", label: "Sales", icon: Tag },
+      { key: "quotations", label: "Quotations", icon: Folder },
+    ]
+  },
+  {
+    key: "operations",
+    label: "Operations",
+    icon: Settings,
+    items: [
+      { key: "accounting", label: "Accounting", icon: Folder },
+      { key: "reports", label: "Reports", icon: Tag },
+      { key: "transfers", label: "Transfers", icon: Layers },
+      { key: "users", label: "Users", icon: Tag },
+    ]
+  }
 ];
 
 export default function Dashboard() {
   const [active, setActive] = useState("categories");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [openGroups, setOpenGroups] = useState({ inventory: true });
 
   // small helper for rendering the active panel
   function renderPanel() {
@@ -74,24 +96,52 @@ export default function Dashboard() {
 
           {/* Nav */}
           <nav className="mt-4 px-2" aria-label="Main navigation">
-            {NAV.map((n) => {
-              const Icon = n.icon;
-              const isActive = active === n.key;
+            {NAV_GROUPS.map((group) => {
+              const GroupIcon = group.icon;
+              const isGroupOpen = openGroups[group.key];
+              const hasActiveItem = group.items.some(item => active === item.key);
               return (
-                <button
-                  key={n.key}
-                  onClick={() => setActive(n.key)}
-                  className={`group w-full flex items-center gap-3 px-4 py-3 my-1 rounded-lg text-left
-                              transition-all duration-200 hover:scale-105
-                              ${isActive ? "bg-primary text-white shadow-lg shadow-primary/25 ring-2 ring-primary/50" : "hover:bg-white/10 text-white/80"}`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  <div className={`p-2 rounded-md ${isActive ? "bg-white/20" : "bg-transparent"}`}>
-                    <Icon className="w-5 h-5 transition-colors" />
-                  </div>
-                  {!sidebarCollapsed && <span className="flex-1">{n.label}</span>}
-                  {/* subtle chevron or count placeholder (optional) */}
-                </button>
+                <div key={group.key} className="mb-2">
+                  <button
+                    onClick={() => setOpenGroups(prev => ({ ...prev, [group.key]: !prev[group.key] }))}
+                    className={`group w-full flex items-center gap-3 px-4 py-3 my-1 rounded-lg text-left
+                                transition-all duration-200 hover:scale-105
+                                ${hasActiveItem ? "bg-primary text-white shadow-lg shadow-primary/25 ring-2 ring-primary/50" : "hover:bg-white/10 text-white/80"}`}
+                  >
+                    <div className={`p-2 rounded-md ${hasActiveItem ? "bg-white/20" : "bg-transparent"}`}>
+                      <GroupIcon className="w-5 h-5 transition-colors" />
+                    </div>
+                    {!sidebarCollapsed && <span className="flex-1">{group.label}</span>}
+                    {!sidebarCollapsed && (
+                      <div className="ml-auto">
+                        {isGroupOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      </div>
+                    )}
+                  </button>
+                  {isGroupOpen && !sidebarCollapsed && (
+                    <div className="ml-6 mt-1 space-y-1">
+                      {group.items.map((item) => {
+                        const ItemIcon = item.icon;
+                        const isActive = active === item.key;
+                        return (
+                          <button
+                            key={item.key}
+                            onClick={() => setActive(item.key)}
+                            className={`group w-full flex items-center gap-3 px-4 py-2 rounded-lg text-left
+                                        transition-all duration-200 hover:scale-105
+                                        ${isActive ? "bg-primary text-white shadow-lg shadow-primary/25 ring-2 ring-primary/50" : "hover:bg-white/10 text-white/80"}`}
+                            aria-current={isActive ? "page" : undefined}
+                          >
+                            <div className={`p-1 rounded-md ${isActive ? "bg-white/20" : "bg-transparent"}`}>
+                              <ItemIcon className="w-4 h-4 transition-colors" />
+                            </div>
+                            <span className="flex-1 text-sm">{item.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
@@ -179,12 +229,12 @@ export default function Dashboard() {
                 <svg className="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-gray-600">{NAV.find((n) => n.key === active)?.label}</span>
+                <span className="text-gray-600">{NAV_GROUPS.flatMap(g => g.items).find((n) => n.key === active)?.label}</span>
               </li>
             </ol>
           </nav>
           <h1 className="text-3xl font-bold tracking-tight text-text">
-            {NAV.find((n) => n.key === active)?.label}
+            {NAV_GROUPS.flatMap(g => g.items).find((n) => n.key === active)?.label}
           </h1>
         </div>
 
